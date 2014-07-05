@@ -1,0 +1,19 @@
+apply plugin: 'eclipse'
+apply plugin: 'groovy'
+
+//////////////////////////////////
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
+
+//////////////////////////////////
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.3'
+    testCompile 'junit:junit:4.11'
+}
+repositories {
+	mavenLocal()
+    mavenCentral()
+}
