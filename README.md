@@ -1,4 +1,4 @@
-# gandas: Test lib based on pandas, the "powerful Python data analysis toolkit"
+# gandas: Groovy data analysis toolkit based on pandas
 
 ## What is it
 
