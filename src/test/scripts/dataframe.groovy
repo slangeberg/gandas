@@ -5,9 +5,9 @@ StopWatch timer = new StopWatch()
 timer.start()
 
 def df = new DataFrame([
-    name: ["Braund", "Cummings"],
+    name: ["Braund", "Cummings", "Johnson"],
     age: [22, 38],
-    fare: [7.25, 71.38],
+    fare: [7.25, 71.38, 55.25],
     survived: [false, true]
 ])
 

@@ -4,13 +4,18 @@ class DataFrame  {
 
   private LinkedHashMap<String, Object> data
 
+  //Expando impl - allows direct access to data
+  // ex:
+  // println df.age
+
+  def getProperty(String name) { data[name] }
+
+  //void setProperty(String name, value) { data[name] = value }
+
   public DataFrame(Map<String, Object> params){
     data = params
   }
 
-  def getProperty(String name) { data[name] }
-  
-  void setProperty(String name, value) { data[name] = value }
 
   /**
    * Basically a row getter
