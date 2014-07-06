@@ -12,6 +12,7 @@ task wrapper(type: Wrapper) {
 
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.3'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
 
     testCompile 'junit:junit:4.11'
 }

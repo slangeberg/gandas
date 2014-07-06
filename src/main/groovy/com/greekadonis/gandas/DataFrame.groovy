@@ -2,6 +2,21 @@ package com.greekadonis.gandas
 
 class DataFrame extends LinkedHashMap<String, Object> {
 
+  /**
+   * Basically a row getter
+   * @return Row data as Map, found at 0-indexed 'row'
+   */
+  Map loc(int row){
+    Map<String, Object> result = new LinkedHashMap<String, Object>()
+    Set<String> columns = getColumns()
+    Object val  = null
+    columns.each { String col ->
+      val = getColumnValues(col)[row]
+      result.put(col, val)
+    }
+    result
+  }
+
   Set<String> getColumns() {
     keySet()
   }
@@ -17,13 +32,13 @@ class DataFrame extends LinkedHashMap<String, Object> {
   String toString() {
     String msg = System.lineSeparator()
     //print columns
-    getColumns().each {
+    Set<String> columns = getColumns()
+    columns.each {
       msg += "$it\t"
     }
     msg += System.lineSeparator()
 
     //just print row by row, for now
-    Set<String> columns = getColumns()
     List<Object> firstColumn = getColumnValues(columns[0])
     int numRows = firstColumn.size()
     int numColumns = columns.size()
