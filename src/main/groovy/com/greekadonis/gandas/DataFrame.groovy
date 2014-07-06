@@ -2,6 +2,12 @@ package com.greekadonis.gandas
 
 class DataFrame  {
 
+  static Closure mean = { List<Object> vals ->
+    vals.sum() / vals.size()
+  }
+
+  /////////////////////////////////
+
   private LinkedHashMap<String, Object> data
 
   //Expando impl - allows direct access to data
@@ -67,7 +73,21 @@ class DataFrame  {
     msg += "\t"
   }
 
-  private String printRow() {
-
+  /**
+   * Applies supplied operation to every column in DataFrame
+   * @param closure The operation to perform. Accepts List<Object> as param
+   * @return Map of column to value pairs, where the value is the post operation value at a column level
+   */
+  Map<String, Object> apply(Closure closure) {
+    Map<String, Object> result = new LinkedHashMap<String, Object>()
+    Set<String> columns = getColumns()
+    List<Object> vals = []
+    Object val  = null
+    columns.each { String col ->
+      vals = getColumnValues(col)
+      val = closure.call(vals)
+      result.put(col, val)
+    }
+    result
   }
 }
