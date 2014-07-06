@@ -1,6 +1,16 @@
 package com.greekadonis.gandas
 
-class DataFrame extends LinkedHashMap<String, Object> {
+class DataFrame  {
+
+  private LinkedHashMap<String, Object> data
+
+  public DataFrame(Map<String, Object> params){
+    data = params
+  }
+
+  def getProperty(String name) { data[name] }
+  
+  void setProperty(String name, value) { data[name] = value }
 
   /**
    * Basically a row getter
@@ -18,11 +28,11 @@ class DataFrame extends LinkedHashMap<String, Object> {
   }
 
   Set<String> getColumns() {
-    keySet()
+    data.keySet()
   }
 
   List<Object> getColumnValues(String column) {
-    this[column]
+    data[column]
   }
 
   /**
