@@ -52,16 +52,18 @@ class DataFrame  {
   @Override
   String toString() {
     String msg = System.lineSeparator()
+    List<Integer> columnSizes = []
     //print columns
     Set<String> columns = getColumns()
     columns.each {
       msg += "$it\t"
+      columnSizes << getColumnValues(it)?.size() ?: 0
     }
     msg += System.lineSeparator()
 
     //just print row by row, for now
     List<Object> firstColumn = getColumnValues(columns[0])
-    int numRows = firstColumn.size()
+    int numRows = columnSizes.max() // some columns may be missing vals
     int numColumns = columns.size()
 
     (0..numRows-1).each { int row ->
