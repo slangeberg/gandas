@@ -6,42 +6,20 @@ import static DataFrame.*
 
 import spock.lang.Specification
 
-/**
- * Created by scott on 7/5/14.
- */
 class DataFrameTest extends Specification {
 
-  def "Can load lots of data"(){
+  def "Can apply closure to column values"(){
 
-    int numEls = 1000000
-    def colOneValues = []
-    def colTwoValues = []
-    (1..numEls).each {
-      colOneValues << it
-      colTwoValues << (it * 2)
+    DataFrame df = new DataFrame([
+        a: [1, 2, 3]
+    ])
+    def result = df.apply { List<Object> vals ->
+      vals.collect {
+        it + 1
+      }
     }
-    def params = [
-        one: colOneValues,
-        two: colTwoValues
-    ]
-
-    ////////
-
-    StopWatch timer = new StopWatch()
-    timer.start()
-
-    DataFrame df = new DataFrame(params)
-    def result = df.apply(mean)
-
-    println "\nCompleted w/#els: $numEls, in ${timer.time}ms"
-
-    ////////
-
-    def expectedOne = colOneValues.sum()/colOneValues.size()
-    def expectedTwo = colTwoValues.sum()/colTwoValues.size()
 
     expect:
-      result.one == expectedOne
-      result.two == expectedTwo
+      result.a == [2, 3, 4]
   }
 }
